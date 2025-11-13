@@ -1,26 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lek-Euro Converter</title>
+    <title>Lek-Euro Converter (Me JavaScript)</title>
 </head>
 <body>
 
-    <h1>Currency Converter</h1>
+    <h1>Currency Converter (Klient)</h1>
 
-    <form action="konvertues.php" method="post">
+    <div id="converter_form">
         
-        <label for="shifra">Enter amount to convert:</label>
-        <input type="number" id="shifra" name="shifra" required><br><br>
+        <h2>Lek/Euro Konvertues</h2>
+        <label for="shifra">Vendos shumën për konvertim:</label>
+        <input type="number" id="shifra" required><br><br>
 
-        <input type="radio" id="lek_to_euro" name="zgjedhja" value="1" required>
+        <input type="radio" id="lek_to_euro" name="zgjedhja" value="1" required checked>
         <label for="lek_to_euro">Lek -> Euro</label><br>
 
         <input type="radio" id="euro_to_lek" name="zgjedhja" value="2">
         <label for="euro_to_lek">Euro -> Lek</label><br><br>
 
-        <input type="submit" value="Convert">
-        
-    </form>
+        <button onclick="konverto()">Konverto</button>
+
+    </div>
+    
+    <hr>
+    
+    <h2>Rezultati:</h2>
+    <p><strong id="rezultat_shfaqur"></strong></p>
+
+    <script>
+        function konverto() {
+            // Kursi i këmbimit
+            const kursi = 97; // 1 € = 97 Lek
+
+            // Merr vlerat nga fushat e inputit
+            const shifraInput = document.getElementById('shifra').value;
+            const zgjedhjaInput = document.querySelector('input[name="zgjedhja"]:checked');
+            const rezultatElement = document.getElementById('rezultat_shfaqur');
+
+            // Validimi
+            if (!shifraInput || !zgjedhjaInput) {
+                rezultatElement.textContent = "Ju lutemi plotësoni shumën dhe zgjedhjen.";
+                return;
+            }
+
+            const vlera = parseFloat(shifraInput);
+            const zgjedhja = zgjedhjaInput.value;
+            let rezultat;
+            let rezultat_shfaqur;
+
+            if (zgjedhja === "1") {
+                // Lek -> Euro
+                rezultat = vlera / kursi;
+                rezultat_shfaqur = `${vlera} Lek = ${rezultat.toFixed(2)} Euro`;
+            } else if (zgjedhja === "2") {
+                // Euro -> Lek
+                rezultat = vlera * kursi;
+                rezultat_shfaqur = `${vlera} Euro = ${rezultat.toFixed(2)} Lek`;
+            } else {
+                rezultat_shfaqur = "Zgjedhje e pavlefshme!";
+            }
+
+            // Shfaq rezultatin
+            rezultatElement.textContent = rezultat_shfaqur;
+        }
+    </script>
 
 </body>
 </html>
