@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lek-Euro Converter</title>
+</head>
+<body>
+
+    <h1>Currency Converter</h1>
+
+    <form action="converter.php" method="post">
+        
+        <label for="shifra">Enter amount to convert:</label>
+        <input type="number" id="shifra" name="shifra" required><br><br>
+
+        <input type="radio" id="lek_to_euro" name="zgjedhja" value="1" required>
+        <label for="lek_to_euro">Lek -> Euro</label><br>
+
+        <input type="radio" id="euro_to_lek" name="zgjedhja" value="2">
+        <label for="euro_to_lek">Euro -> Lek</label><br><br>
+
+        <input type="submit" value="Convert">
+    </form>
+
+</body>
+</html>
